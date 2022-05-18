@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>trending</title>
+    <style>
+        #trending{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-template-rows: repeat(4,250px);
+            gap: 20px;
+          
+            text-align: center;
+        }
+        #trending>div{
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            /* display: flex;
+            flex-direction: column;
+            justify-content: center; */
+        }
+        img{
+            width: 70%;
+            height: 120px;
+            margin-top: 10PX;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
+        }
+        h1{
+            text-align: center;
+            color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <a href="hotstar.html">Back</a>
+    <h1>Trending Now</h1>
+    <div id="trending"></div>
+</body>
+</html>
+<script>
+
+async function trending(){
+
+    try{
+
+        let raw=await fetch("https://api.themoviedb.org/3/trending/all/day?api_key=cf820e686ee17f6d075f033cc132b0dd")
+        let orgi=await raw.json()
+        displayData(orgi)
+
+    }
+    catch(error){
+console.log(error)
+    }
+}
+
+function displayData(orgi){
+
+    let data=orgi.results
+    data.forEach(ele => {
+
+
+        let box= document.createElement("div")
+
+        let imageurl=ele.poster_path
+        let url=`https://image.tmdb.org/t/p/w500${imageurl}`;
+
+        let image=document.createElement("img")
+        image.src=url
+
+        let p1=document.createElement("p")
+        p1.innerText=ele.original_title
+
+        let p2=document.createElement("p")
+        p2.innerText=ele.release_date
+
+        let p3=document.createElement("p")
+        p3.innerText=ele.vote_average
+
+        box.append(image,p1,p2,p3)
+
+        document.getElementById("trending").append(box)
+    });
+}
+
+trending()
+</script>

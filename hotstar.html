@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotstar</title>
+    <link rel="stylesheet" href="hotstar.css"/>
+</head>
+<body>
+    <h1>Hotstar</h1>
+<h2><a href="trending.html">Trending</a></h2>
+<div id="main">
+
+    <div id="searchbox">
+   <input type="text" placeholder="Search" id="search" oninput="debounce(search,1000)">
+    <div id="suggestion"></div>
+   </div>
+
+   <div id="middle"></div>
+   <div id="last"></div>
+
+</div>
+</body>
+</html>
+
+<script src="hotstar.js"></script>
